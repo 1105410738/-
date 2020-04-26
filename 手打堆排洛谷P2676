@@ -1,0 +1,47 @@
+#include<iostream>
+using namespace std;
+int n, b, nn;
+int heap[1000000];
+void up(int c)//上升
+{
+	while (heap[c / 2] < heap[c] && c > 1)
+	{
+		swap(heap[c / 2], heap[c]);
+		c /= 2;
+	}
+}
+void down(int h[], int c)//下降
+{
+	while (h[c] < h[c * 2] && c <= n || h[c] < h[c * 2 + 1] && c <= n)
+	{
+		if (h[c * 2 + 1]>h[c * 2]){ swap(h[c * 2 + 1], h[c]); c = c * 2 + 1; }
+		else{ swap(h[c * 2], h[c]); c *= 2; }
+		
+	}
+}
+void insert(int c)//插入
+{
+	heap[++nn] = c;
+	up( nn);
+}
+int main()
+{
+	cin >> n>> b;
+	nn = 0;
+	int a, cnt = 0;
+	for (int i = 1; i <= n; i++)
+	{
+		cin >> a;
+		insert(a);
+	}
+	int sum = 0;
+	for (int i = 0; i < n; i++)
+	{
+		sum += heap[1];
+		cnt++;
+		if (sum >= b){ break; }
+		heap[1] = 0;
+		down(heap, 1);
+	}
+		cout << cnt;
+}
