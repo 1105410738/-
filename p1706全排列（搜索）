@@ -1,0 +1,22 @@
+void sousuo(int a)
+{
+	if (a == n)
+	{
+		for (int i = 1; i <= n; i++)
+		{
+			cout << setw(3) << b[i];
+		}
+		cout << endl;
+		return;
+	}
+	for (int i = 1; i <= n; i++)
+	{
+		if (!c[i])
+		{
+			c[i] = 1;
+			b[a+1] = i;
+			sousuo(a + 1);
+			c[i] = 0;
+		}
+	}
+}
