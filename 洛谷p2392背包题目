@@ -1,0 +1,58 @@
+#include<iostream>
+#include<algorithm>
+#include<string.h>
+#include<math.h>
+#include<stdio.h>
+#include<cstdio>
+using namespace std;
+int s1, s2, s3, s4;
+int A[21], B[21], C[21], D[21];
+int suma, sumb, sumc, sumd;
+int f[21][1024];
+int jisuan(int G[], int c,int sum)
+{
+
+	int t = 0;
+	for (int i = 1; i <= c; i++)
+	{
+		for (int i1 = 0; i1 <= sum / 2; i1++)
+		{
+			f[i][i1] = f[i - 1][i1];
+			if (i1 >= G[i])
+			{
+				f[i][i1] = max(f[i][i1], f[i-1][i1 - G[i]] + G[i]);
+			}
+			t = max(t, f[i][i1]);
+		}
+	}
+	return max(t, sum - t);
+	
+}
+int main()
+{
+	
+	cin >> s1 >> s2 >> s3 >> s4;
+	for (int i = 1; i <= s1; i++)
+	{
+		cin >> A[i];
+		suma += A[i];
+	}
+	for (int i = 1; i <= s2; i++)
+	{
+		cin >> B[i];
+		sumb += B[i];
+	}
+	for (int i = 1; i <= s3; i++)
+	{
+		cin >> C[i];
+		sumc += C[i];
+	}
+	for (int i = 1; i <= s4; i++)
+	{
+		cin >>D[i];
+		sumd += D[i];
+	}
+	
+	cout << jisuan(A, s1,suma) + jisuan(B, s2,sumb) + jisuan(C, s3,sumc) + jisuan(D, s4,sumd);
+
+}
